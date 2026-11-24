@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: kafkaConsumer
+  kafka:
+    # Endereço do broker Kafka
+    bootstrap-servers: localhost:9092
+    consumer:
+      # Grupo de consumo: consumidores com o mesmo group-id dividem as partições do tópico
+      group-id: kafka-consumer-group
+      # Se o grupo ainda não tem offset salvo, começa a ler do início do tópico
+      auto-offset-reset: earliest
+      # Converte os bytes recebidos do Kafka de volta para String
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+# Nome do tópico escutado (deve ser o mesmo usado pelo Producer)
+app:
+  kafka:
+    topic: meu-topico
+
+# Porta diferente da 8081 para nao conflitar com a aplicacao Producer
+server:
+  port: 8082

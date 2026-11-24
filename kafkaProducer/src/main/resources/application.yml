@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: kafka-producer
+  kafka:
+    # Endereco do servidor (broker) Kafka
+    bootstrap-servers: localhost:9092
+    consumer:
+      # Solicitado anteriormente; nao e usado pelo producer (so por consumers)
+      group-id: grupo-producer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: all
+      retries: 3
+      properties:
+        enable.idempotence: true
+
+server:
+  port: 8081
+
+app:
+  kafka:
+    topic: meu-topico
